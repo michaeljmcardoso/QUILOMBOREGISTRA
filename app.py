@@ -27,7 +27,7 @@ def export_to_excel(df):
     st.success("Dados exportados com sucesso para atendimentos.xlsx")
 
 # Interface do Formulário usando Streamlit
-st.title("Registro de Atendimentos do Serviço Quilombola_SR-MA")
+st.markdown('<h1 style="color: blue;">Registro de Atendimentos da Divisão Quilombola_SR-MA</h1>', unsafe_allow_html=True)
 
 # Campos do Formulário
 nome = st.text_input("Nome do Atendente")
