@@ -1,4 +1,4 @@
-#!/home/import_michael/QUILOMBOREGISTRA/quilombo_registra/bin/python3
+#!/home/import_michael/QUILOMBOREGISTRA/quilombo_registra/bin/python3.10
 # -*- coding: utf-8 -*-
 import re
 import sys
