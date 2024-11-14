@@ -49,16 +49,24 @@ iniciar_banco_de_dados()
 # Interface do Streamlit
 st.markdown('<h1 style="color: blue;">Registro de Atendimentos da Divisão Quilombola</h1>', unsafe_allow_html=True)
 
-# Campos do Formulário
-nome = st.text_input("Nome do Atendente")
-interessado = st.text_input("Nome do Interessado")
-comunidade = st.text_input("Comunidade")
-municipio = st.text_input("Município")
-telefone = st.text_input("Telefone")
-email = st.text_input("Email")
-protocolo = st.text_input("Protocolo SEI")
-data = st.date_input("Data", datetime.today())
-motivo = st.text_area("Motivo do Atendimento")
+# Dividir a página em colunas para ajustar o comprimento dos inputs
+col1, col2 = st.columns(2)
+
+# Campos do Formulário com largura ajustada usando colunas
+with col1:
+    nome = st.text_input("Nome do Atendente", max_chars=50, key="nome")
+    interessado = st.text_input("Nome do Interessado", max_chars=50, key="nome_interessado")
+    telefone = st.text_input("Telefone", max_chars=11, key="fone")
+    protocolo = st.text_input("Protocolo SEI", max_chars=10, key="protocolo")
+
+with col2:
+    comunidade = st.text_input("Comunidade")
+    municipio = st.text_input("Município")
+    email = st.text_input("Email")
+    data = st.date_input("Data", datetime.today())
+
+# Campo de texto com largura ajustada usando `st.expander`
+motivo = st.text_area("Motivo do Atendimento", height=100)
 
 if st.button("Salvar"):
     if nome:
