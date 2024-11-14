@@ -10,7 +10,7 @@ def iniciar_banco_de_dados():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS atendimentos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT,
+            atendente TEXT,
             interessado TEXT,
             comunidade TEXT,
             municipio TEXT,
@@ -24,16 +24,16 @@ def iniciar_banco_de_dados():
     conn.commit()
     conn.close()
 
-def adicionar_registro(nome, interessado, comunidade, municipio, telefone, email, protocolo, data, motivo):
+def adicionar_registro(atendente, interessado, comunidade, municipio, telefone, email, protocolo, data, motivo):
     if isinstance(data, datetime):
         data = data.strftime("%Y-%m-%d")
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO atendimentos (nome, interessado, comunidade, municipio, telefone, email, protocolo, data, motivo)
+        INSERT INTO atendimentos (atendente, interessado, comunidade, municipio, telefone, email, protocolo, data, motivo)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (nome, interessado, comunidade, municipio, telefone, email, protocolo, data, motivo))
+    ''', (atendente, interessado, comunidade, municipio, telefone, email, protocolo, data, motivo))
     conn.commit()
     conn.close()
 
@@ -46,15 +46,13 @@ def obter_todos_os_registros():
 
 iniciar_banco_de_dados()
 
-# Interface do Streamlit
+# Interface com Streamlit
 st.markdown('<h1 style="color: blue;">Registro de Atendimentos da Divisão Quilombola</h1>', unsafe_allow_html=True)
 
-# Dividir a página em colunas para ajustar o comprimento dos inputs
 col1, col2 = st.columns(2)
 
-# Campos do Formulário com largura ajustada usando colunas
 with col1:
-    nome = st.text_input("Nome do Atendente", max_chars=50, key="nome")
+    atendente = st.text_input("Nome do Atendente", max_chars=50, key="atendente", help="Digite o nome do Atendente")
     interessado = st.text_input("Nome do Interessado", max_chars=50, key="nome_interessado")
     telefone = st.text_input("Telefone", max_chars=11, key="fone")
     protocolo = st.text_input("Protocolo SEI", max_chars=10, key="protocolo")
@@ -65,13 +63,12 @@ with col2:
     email = st.text_input("Email")
     data = st.date_input("Data", datetime.today())
 
-# Campo de texto com largura ajustada usando `st.expander`
-motivo = st.text_area("Motivo do Atendimento", height=100)
+motivo = st.text_area("Motivo do Atendimento", height=100, help="Digite o motivo do atendimento")
 
 if st.button("Salvar"):
-    if nome:
-        adicionar_registro(nome, interessado, comunidade, municipio, telefone, email, protocolo, data, motivo)
-        st.success(f"Obrigado, {nome}. Os dados foram salvos com sucesso!")
+    if atendente:
+        adicionar_registro(atendente, interessado, comunidade, municipio, telefone, email, protocolo, data, motivo)
+        st.success(f"Obrigado, {atendente}. Os dados foram salvos com sucesso!")
     else:
         st.error("Por favor, preencha o campo 'Nome'.")
 
@@ -82,13 +79,6 @@ if 'id' in df.columns:
     df = df.drop(columns=['id'])  # Remove a coluna 'id'
 df.index = df.index + 1  # Ajusta o índice para começar em 1
 st.dataframe(df)
-
-st.download_button(
-    label="Exportar para CSV",
-    data=df.to_csv(index=False),
-    file_name='atendimentos.csv',
-    mime='text/csv'
-)
 
 if st.button("Exportar para Excel"):
     df.to_excel('atendimentos.xlsx', index=False)
