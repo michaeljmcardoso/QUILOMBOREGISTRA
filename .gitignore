@@ -1,5 +1,9 @@
 /atendimentos.xlsx
 /database.db
+/1_Visualizacoes.py
+/2_Registro.py
+/3_About.py
+/.streamlit
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
