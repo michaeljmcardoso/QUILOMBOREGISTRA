@@ -152,12 +152,24 @@ def pagina_visualizacoes():
     else:
         st.info("Nenhum registro encontrado")
 
+# Função para Página Sobre
+def pagina_about():
+    st.subheader("Sobre o Projeto")
+    st.write("""
+        Este sistema foi desenvolvido para registrar os atendimentos da Divisão Quilombola.
+        Desenvolvido por **Michael J M Cardoso**.
+        Projeto focado em otimizar o registro e visualização de atendimentos em comunidades.
+    """)
+
 # Navegação entre páginas
 st.sidebar.title("Menu de Navegação")
-pagina = st.sidebar.radio("Selecione uma Página", ["Home", "Visualizações"])
+pagina = st.sidebar.radio("Selecione uma Página", ["Home", "Visualizações", "Sobre"])
+
 
 # Controle de navegação
 if pagina == "Home":
     pagina_home()
 elif pagina == "Visualizações":
     pagina_visualizacoes()
+elif pagina == "Sobre":
+    pagina_about()
