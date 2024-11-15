@@ -128,6 +128,7 @@ def grafico_atendimentos_por_data(df):
 def pagina_visualizacoes():
     st.subheader("Visualizações de Dados")
     df = obter_todos_os_registros()
+
     if not df.empty:
         st.write("Tabela de Atendimentos")
         if 'id' in df.columns:
@@ -135,33 +136,28 @@ def pagina_visualizacoes():
         df.index = df.index + 1
         st.dataframe(df)
 
-        # Exibir gráfico de atendimentos por município
-        st.write("Gráfico de Atendimentos por Município")
-        grafico_atendimentos_por_municipio(df)
+        # Menu para selecionar visualização
+        opcao = st.selectbox(
+            "Escolha a visualização",
+            ["Selecione...", "Atendimentos por Município", "Atendimentos por Data"]
+        )
 
-        # Exibir gráfico de atendimentos por data
-        st.write("Gráfico de Atendimentos por Data de Abertura")
-        grafico_atendimentos_por_data(df)
+        if opcao == "Atendimentos por Município":
+            st.write("Gráfico de Atendimentos por Município")
+            grafico_atendimentos_por_municipio(df)
+
+        elif opcao == "Atendimentos por Data":
+            st.write("Gráfico de Atendimentos por Data de Abertura")
+            grafico_atendimentos_por_data(df)
     else:
         st.info("Nenhum registro encontrado")
 
-# Função para Página Sobre
-def pagina_about():
-    st.subheader("Sobre o Projeto")
-    st.write("""
-        Este sistema foi desenvolvido para registrar os atendimentos da Divisão Quilombola.
-        Desenvolvido por **Michael J M Cardoso**.
-        Projeto focado em otimizar o registro e visualização de atendimentos em comunidades.
-    """)
-
 # Navegação entre páginas
 st.sidebar.title("Menu de Navegação")
-pagina = st.sidebar.radio("Selecione uma Página", ["Home", "Visualizações", "Sobre"])
+pagina = st.sidebar.radio("Selecione uma Página", ["Home", "Visualizações"])
 
 # Controle de navegação
 if pagina == "Home":
     pagina_home()
 elif pagina == "Visualizações":
     pagina_visualizacoes()
-elif pagina == "Sobre":
-    pagina_about()
