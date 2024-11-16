@@ -3,7 +3,7 @@
 /1_Visualizacoes.py
 /2_Registro.py
 /3_About.py
-/.streamlit
+#/.streamlit
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
