@@ -49,7 +49,7 @@ iniciar_banco_de_dados()
 
 # Função para Página Home
 def pagina_home():
-    st.markdown('<h1 style="color: blue;">Registro de Atendimentos</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="color: "#1f77b4";">Registro de Atendimentos</h1>', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
