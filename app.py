@@ -167,7 +167,7 @@ pagina = st.sidebar.radio("Selecione uma Página", ["Página Inicial", "Visualiz
 
 
 # Controle de navegação
-if pagina == "Home":
+if pagina == "Página Inicial":
     pagina_home()
 elif pagina == "Visualizações":
     pagina_visualizacoes()
