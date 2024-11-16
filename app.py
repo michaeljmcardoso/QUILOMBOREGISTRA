@@ -49,7 +49,7 @@ iniciar_banco_de_dados()
 
 # Função para Página Home
 def pagina_home():
-    st.markdown('<h1 style="color: blue;">Registro de Atendimentos da Divisão Quilombola</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="color: blue;">Registro de Atendimentos</h1>', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
@@ -158,12 +158,12 @@ def pagina_about():
     st.write("""
         Este sistema foi desenvolvido para registrar os atendimentos da Divisão Quilombola.
         Desenvolvido por **Michael J M Cardoso**.
-        Projeto focado em otimizar o registro e visualização de atendimentos em comunidades.
+        Projeto focado em otimizar o registro, visualização e consulta de atendimentos.
     """)
 
 # Navegação entre páginas
 st.sidebar.title("Menu de Navegação")
-pagina = st.sidebar.radio("Selecione uma Página", ["Home", "Visualizações", "Sobre"])
+pagina = st.sidebar.radio("Selecione uma Página", ["Página Inicial", "Visualizações", "Sobre"])
 
 
 # Controle de navegação
